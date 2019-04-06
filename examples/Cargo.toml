@@ -6,3 +6,4 @@ edition = "2018"
 
 [dependencies]
 graphics = { version = "0.1", path = "../graphics" }
+graphics_rendy = { version = "0.1", path = "../graphics_rendy" }

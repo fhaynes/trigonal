@@ -1,8 +1,8 @@
 [package]
-name = "game"
+name = "graphics_rendy"
 version = "0.1.0"
 authors = ["Fletcher Haynes <fletcher@capitalprawn.com>"]
 edition = "2018"
 
 [dependencies]
-graphics_rendy = { version = "0.1", path = "../graphics_rendy" }
+rendy = { git = "https://github.com/omni-viral/rendy", branch = "master" }

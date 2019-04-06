@@ -3,5 +3,5 @@
 members = [
     "graphics",
     "examples",
-    "game"
+    "graphics_rendy"
 ]

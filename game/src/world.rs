@@ -1,15 +1,18 @@
 //! Top level module that contains the entire game world
 
-use graphics::init;
+use graphics_rendy::init;
 
 /// A `World` consists of the game window and what is drawn on it. It is responsible for
 /// the game loop.
-pub struct World<'a> {
-    drawable_surface: init::GraphicsSurface<'a>
+
+#[cfg(any(feature = "dx12", feature = "metal", feature = "vulkan"))]
+pub struct World {
+    drawable_surface: init::GraphicsSurface
 }
 
-impl<'a> World<'a> {
-    pub fn new() -> World<'a> {
+#[cfg(any(feature = "dx12", feature = "metal", feature = "vulkan"))]
+impl World {
+    pub fn new() -> World{
         World {
             drawable_surface: init::GraphicsSurface::new()
         }
