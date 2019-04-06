@@ -1,0 +1,8 @@
+[package]
+name = "examples"
+version = "0.1.0"
+authors = ["Fletcher Haynes <fletcher@capitalprawn.com>"]
+edition = "2018"
+
+[dependencies]
+graphics = { version = "0.1", path = "../graphics" }
