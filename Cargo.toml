@@ -1,7 +1,6 @@
 [workspace]
 
 members = [
-    "graphics",
-    "examples",
-    "graphics_rendy"
+    "graphics_rendy",
+    "graphics_vulkano"
 ]

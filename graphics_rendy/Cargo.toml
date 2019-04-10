@@ -4,5 +4,17 @@ version = "0.1.0"
 authors = ["Fletcher Haynes <fletcher@capitalprawn.com>"]
 edition = "2018"
 
+[features]
+dx12 = ["rendy/dx12"]
+metal = ["rendy/metal"]
+vulkan = ["rendy/vulkan"]
+
 [dependencies]
-rendy = { git = "https://github.com/omni-viral/rendy", branch = "master" }
+#rendy = { git = "https://github.com/omni-viral/rendy", branch = "master", features = ["full", "empty"] }
+rendy = { path = "../../rendy/rendy", features = ["full", "empty"] }
+gfx-hal = "0.1"
+winit = "0.18"
+failure = "0.1.5"
+env_logger = "0.6.1"
+log = "0.4.6"
+
