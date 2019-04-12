@@ -10,6 +10,7 @@
 use std::marker::PhantomData;
 
 use failure;
+use lazy_static;
 
 use {
     gfx_hal::Device as _,
@@ -29,6 +30,15 @@ use {
     },
 };
 
+lazy_static::lazy_static! {
+    static ref VERTEX: StaticShaderInfo = StaticShaderInfo::new(
+        concat!(env!("CARGO_MANIFEST_DIR"), "pipelines/shaders/line.vert"),
+        ShaderKind::Vertex,
+        SourceLanguage::GLSL,
+        "main",
+    );
+}
+
 #[derive(Debug, Default)]
 struct LinesPipelineDesc;
 
@@ -44,13 +54,27 @@ where
 {
     type Pipeline = LinesPipeline<B>;
 
+    fn vertices(
+        &self,
+    ) -> Vec<(
+        Vec<gfx_hal::pso::Element<gfx_hal::format::Format>>,
+        gfx_hal::pso::ElemStride,
+        gfx_hal::pso::InstanceRate,
+    )> {
+        vec![PosColor::VERTEX.gfx_vertex_input_desc(0)]
+    }
+
     fn load_shader_set<'a>(
         &self,
         storage: &'a mut Vec<B::ShaderModule>,
-        _factory: &mut Factory<B>,
+        factory: &mut Factory<B>,
         _aux: &T,
     ) -> gfx_hal::pso::GraphicsShaderSet<'a, B> {
         storage.clear();
+        
+        log::trace!("Load shader module '{:#?}'", *VERTEX);
+        storage.push(unsafe { VERTEX.module(factory).unwrap() });
+        
         gfx_hal::pso::GraphicsShaderSet {
             vertex: gfx_hal::pso::EntryPoint {
                 entry: "main",
